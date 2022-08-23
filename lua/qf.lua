@@ -845,7 +845,9 @@ function qf.setup_autocmds(config)
 
   au("WinClosed", function()
     if vim.o.ft ~= "ft" then
-      vim.cmd("lclose")
+      vim.defer_fn(function()
+        vim.cmd("lclose")
+      end, 50)
     end
   end)
 
@@ -866,13 +868,17 @@ function qf.setup_autocmds(config)
 
     if list.focus_open then
       au("WinEnter", function()
-        open(k, true, true)
+        vim.defer_fn(function()
+          open(k, true, true)
+        end, 50)
       end)
     end
 
     if list.auto_open then
       au("QuickFixCmdPost", function()
-        open(k, true, true)
+        vim.defer_fn(function()
+          open(k, true, true)
+        end, 50)
       end, { pattern = list_post_commands(k) })
     end
   end
