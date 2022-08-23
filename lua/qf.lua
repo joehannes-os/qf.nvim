@@ -870,7 +870,7 @@ function qf.setup_autocmds(config)
       au("WinEnter", function()
         vim.defer_fn(function()
           open(k, true, true)
-        end, 50)
+        end, 1000)
       end)
     end
 
@@ -878,7 +878,7 @@ function qf.setup_autocmds(config)
       au("QuickFixCmdPost", function()
         vim.defer_fn(function()
           open(k, true, true)
-        end, 50)
+        end, 1000)
       end, { pattern = list_post_commands(k) })
     end
   end
